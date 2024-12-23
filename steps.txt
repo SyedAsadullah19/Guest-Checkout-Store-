@@ -1,0 +1,54 @@
+Database: Use a database like SQLite or PostgreSQL to store product information, user details, and order history.
+User Authentication: Implement user registration and login functionalities using Flask-Login or similar libraries to personalize the shopping experience.
+Admin Panel: Create an admin interface to manage products, orders, and users, allowing you to add, edit, and delete items and track sales.
+Product Pages: Create separate routes and templates for individual products, displaying details like images, descriptions, and prices.
+Shopping Cart: Use a library like Flask-Session to manage user shopping carts, allowing them to add, remove, and view items.
+# Payment Integration: Integrate payment gateways like Stripe or PayPal to enable secure online payments. Comming Soon!
+
+
+All Databases:
+1. Admin Login - Login Database
+{
+    uid : integer pk AI 
+    uname: string nullable = False UK
+    password : string nullable = False 
+}
+2. Product Details - Product Database
+{
+    pid : integer pk AI
+    pname : string unique
+    pimage : string notnull true
+    price: int 
+    qty: int
+    about: string 
+
+}
+3. Order Database - Ordering Details
+{
+    oid = db.Column(db.Integer, primary_key= True, autoincrement=True)
+    oname = db.Column(db.String ,nullable = False, unique=True )
+    price = db.Column(db.Integer, nullable = False)
+    qty = db.Column(db.Integer, nullable = False)
+    name = db.Column(db.String ,nullable = False)
+    address = db.Column(db.String ,nullable = False)
+    phone = db.Column(db.Integer, nullable = False)
+    date =  db.Column(db.Date, default=date.today())
+    status = db.Column(db.String, default="pending")
+}
+
+[PR:product_route, OR:Order_Route, LR:Login_Route, DR:Details_Route, TH:Thanks_Route]
+templates
+{   
+    add-product:/add/product/:ad_pro: #PRAdmin
+    delete-product:/delete/product/:del_pro: #PRAdmin
+    update-product:/update/product/:up_pro:  #PRAdmin
+    all-products:/product/admin:product_admin: #PRAdmin
+    orders:/dashboard/admin:dashboard: #ORAdmin
+    update-order:/update/order/admin:upd_or: #ORAdmin
+    delete-order:/delete/order/admin:del_or: #ORAdmin
+    user-order:/user/cart/:user_crt: #ORUser
+    user-order:/user/order/:user_or: #ORUser
+    user-details:/user/details/:user_det: #DTUser 
+    user-thanks:/user/thanks/:user_th: #THUser
+    admin-login:/admin/login:adminlogin: #LRAdmin
+}
